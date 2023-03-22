@@ -8,14 +8,36 @@ const Auth = () => {
     const changeAuthMode = () => {
       setAuthMode(authMode === "signin" ? "signup" : "signin")
     }
-  
-    const SubmitForm = (e) => {
-        e.preventDefault();
-        // console.log("Submitted")
-        axios.get("http://localhost:9001/api/v1/auth").then((resp)=>{
-            console.log(resp.data)
-        }).catch((err)=>console.log(err));
+
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+
+    const createUser = (username, password) => {
+      const user = {username, password}
+      return user
     }
+  
+    const SubmitLoginForm = (e) => {
+        e.preventDefault();
+        const loginUrl = 'http://localhost:9001/api/v1/auth/login'
+        const loginUser = createUser(username, password)
+        axios.post(loginUrl, loginUser).then((resp)=>console.log(resp))
+
+
+        // // console.log("Submitted")
+        // axios.get("http://localhost:9001/api/v1/auth").then((resp)=>{
+        //     console.log(resp.data)
+        // }).catch((err)=>console.log(err));
+
+    }
+
+    const SubmitRegisterForm = (e) => {
+      e.preventDefault();
+      const registerUrl = 'http://localhost:9001/api/v1/auth/register'
+      const registerUser = createUser(username, password)
+      axios.post(registerUrl, registerUser).then((resp)=>console.log(resp))
+
+  }
 
 
     if (authMode === "signin") {
@@ -36,6 +58,8 @@ const Auth = () => {
                   type="email"
                   className="form-control mt-1"
                   placeholder="Enter email"
+                  value={username}
+                  onChange={(e)=>setUsername(e.target.value)}
                 />
               </div>
               <div className="form-group mt-3">
@@ -44,10 +68,12 @@ const Auth = () => {
                   type="password"
                   className="form-control mt-1"
                   placeholder="Enter password"
+                  value={password}
+                  onChange={(e)=>setPassword(e.target.value)}
                 />
               </div>
               <div className="d-grid gap-2 mt-3">
-                <button type="submit" className="btn btn-primary" onClick={(e)=> SubmitForm(e)}>
+                <button type="submit" className="btn btn-primary" onClick={(e)=> SubmitLoginForm(e)}>
                   Submit
                 </button>
               </div>
@@ -64,7 +90,7 @@ const Auth = () => {
       <div className="Auth-form-container">
         <form className="Auth-form">
           <div className="Auth-form-content">
-            <h3 className="Auth-form-title">Sign In</h3>
+            <h3 className="Auth-form-title">Sign Up</h3>
             <div className="text-center">
               Already registered?{" "}
               <span className="link-primary" onClick={changeAuthMode}>
@@ -85,6 +111,8 @@ const Auth = () => {
                 type="email"
                 className="form-control mt-1"
                 placeholder="Email Address"
+                value={username}
+                onChange={(e)=>setUsername(e.target.value)}
               />
             </div>
             <div className="form-group mt-3">
@@ -93,10 +121,12 @@ const Auth = () => {
                 type="password"
                 className="form-control mt-1"
                 placeholder="Password"
+                value={password}
+                onChange={(e)=>setPassword(e.target.value)}
               />
             </div>
             <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-primary" onClick={(e)=> SubmitForm(e)}>
+              <button type="submit" className="btn btn-primary" onClick={(e)=> SubmitRegisterForm(e)}>
                 Submit
               </button>
             </div>
