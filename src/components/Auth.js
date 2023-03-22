@@ -11,6 +11,7 @@ const Auth = () => {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [isAuthenticated, setAuthenticated] = useState(false)
 
     const createUser = (username, password) => {
       const user = {username, password}
@@ -21,13 +22,11 @@ const Auth = () => {
         e.preventDefault();
         const loginUrl = 'http://localhost:9001/api/v1/auth/login'
         const loginUser = createUser(username, password)
-        axios.post(loginUrl, loginUser).then((resp)=>console.log(resp))
-
-
-        // // console.log("Submitted")
-        // axios.get("http://localhost:9001/api/v1/auth").then((resp)=>{
-        //     console.log(resp.data)
-        // }).catch((err)=>console.log(err));
+        axios.post(loginUrl, loginUser).then((resp)=>{
+        setAuthenticated(resp.data)}
+        ).then(console.log(isAuthenticated)).catch(
+          (err)=>console.log(err)
+        )
 
     }
 
