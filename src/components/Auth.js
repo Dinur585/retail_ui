@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 import '../styles/Auth.css'
-
+import { useNavigate } from "react-router-dom";
 const Auth = () => {
     let [authMode, setAuthMode] = useState("signin")
-
+    let navigate = useNavigate(); 
     const changeAuthMode = () => {
       setAuthMode(authMode === "signin" ? "signup" : "signin")
     }
@@ -27,7 +27,7 @@ const Auth = () => {
         ).then(console.log(isAuthenticated)).catch(
           (err)=>console.log(err)
         )
-
+        navigate('/items');
     }
 
     const SubmitRegisterForm = (e) => {
