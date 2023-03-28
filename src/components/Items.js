@@ -4,7 +4,7 @@ import { useContext, useEffect, useReducer } from 'react';
 import '../index.css';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-const mockData = require('./items.json');
+//const mockData = require('./items.json');
 
 
 function Items() {
