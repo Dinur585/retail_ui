@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.book{
+  width: 20%;
+    display: block;
+    margin: 0 auto;
+}
+/* .addcart{
+  display: flex;
+  justify-content: end;
+} */
+.navbar>.container, .navbar>.container-fluid, .navbar>.container-lg, .navbar>.container-md, .navbar>.container-sm, .navbar>.container-xl, .navbar>.container-xxl {
+  display: flex;
+  flex-wrap: inherit;
+  justify-content: end !important;
+}
