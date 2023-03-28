@@ -19,13 +19,16 @@ const Auth = () => {
     }
   
     const SubmitLoginForm = (e) => {
+        
         e.preventDefault();
         const loginUrl = 'http://localhost:9001/api/v1/auth/login'
         const loginUser = createUser(username, password)
         axios.post(loginUrl, loginUser).then((resp)=>{
-        setAuthenticated(resp.data)}
-        ).then(console.log(isAuthenticated)).catch(
-          (err)=>console.log(err)
+        setAuthenticated(resp.data)
+        alert(resp.data.message)
+      }
+        ).catch(
+          (err)=>alert(err.response.data.message)
         )
 
     }
@@ -34,7 +37,8 @@ const Auth = () => {
       e.preventDefault();
       const registerUrl = 'http://localhost:9001/api/v1/auth/register'
       const registerUser = createUser(username, password)
-      axios.post(registerUrl, registerUser).then((resp)=>console.log(resp))
+      axios.post(registerUrl, registerUser).then((resp)=>alert(resp.data.message))
+      .catch(err => alert(err.response.data.message))
 
   }
 
