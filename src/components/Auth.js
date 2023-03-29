@@ -21,7 +21,7 @@ const Auth = () => {
     const SubmitLoginForm = (e) => {
         
         e.preventDefault();
-        const loginUrl = 'http://localhost:9001/api/v1/auth/login'
+        const loginUrl = 'https://localhost:9001/api/v1/auth/login'
         const loginUser = createUser(username, password)
         axios.post(loginUrl, loginUser).then((resp)=>{
         setAuthenticated(resp.data)
@@ -35,7 +35,7 @@ const Auth = () => {
 
     const SubmitRegisterForm = (e) => {
       e.preventDefault();
-      const registerUrl = 'http://localhost:9001/api/v1/auth/register'
+      const registerUrl = 'https://localhost:9001/api/v1/auth/register'
       const registerUser = createUser(username, password)
       axios.post(registerUrl, registerUser).then((resp)=>alert(resp.data.message))
       .catch(err => alert(err.response.data.message))
